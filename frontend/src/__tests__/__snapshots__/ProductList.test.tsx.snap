@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductList should match snapshot 1`] = `
+<div>
+  <div
+    class="space-y-6"
+  >
+    <div
+      class="bg-white p-6 rounded-lg shadow-md space-y-4"
+    >
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-4"
+      >
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="nameFilter"
+          >
+            Buscar por nome
+          </label>
+          <input
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            id="nameFilter"
+            placeholder="Digite o nome do produto"
+            type="text"
+            value=""
+          />
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="minPrice"
+          >
+            Preço mínimo (R$)
+          </label>
+          <div
+            class="relative mt-1"
+          >
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            >
+              <span
+                class="text-gray-500 sm:text-sm"
+              >
+                R$
+              </span>
+            </div>
+            <input
+              class="pl-12 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              id="minPrice"
+              min="0"
+              step="0.001"
+              type="number"
+              value=""
+            />
+          </div>
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="maxPrice"
+          >
+            Preço máximo (R$)
+          </label>
+          <div
+            class="relative mt-1"
+          >
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            >
+              <span
+                class="text-gray-500 sm:text-sm"
+              >
+                R$
+              </span>
+            </div>
+            <input
+              class="pl-12 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              id="maxPrice"
+              min="0"
+              step="0.001"
+              type="number"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex space-x-4"
+      >
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="sortBy"
+          >
+            Ordenar por
+          </label>
+          <select
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            id="sortBy"
+          >
+            <option
+              value="name"
+            >
+              Nome
+            </option>
+            <option
+              value="price"
+            >
+              Preço
+            </option>
+          </select>
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="sortOrder"
+          >
+            Ordem
+          </label>
+          <select
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            id="sortOrder"
+          >
+            <option
+              value="asc"
+            >
+              Crescente
+            </option>
+            <option
+              value="desc"
+            >
+              Decrescente
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
+      <div
+        class="bg-white rounded-lg shadow-md overflow-hidden"
+        data-testid="product-card"
+      >
+        <div
+          class="relative h-48"
+        >
+          <img
+            alt="Test Product 1"
+            class="object-cover"
+            src="/images/test-product-1.jpg"
+          />
+        </div>
+        <div
+          class="p-4"
+        >
+          <h3
+            class="text-lg font-semibold"
+          >
+            Test Product 1
+          </h3>
+          <p
+            class="text-gray-600"
+          >
+            Eletrônicos
+          </p>
+          <p
+            class="text-sm text-gray-500 mt-2"
+          >
+            Test description 1
+          </p>
+          <p
+            class="text-xl font-bold text-blue-600 mt-2"
+          >
+            R$ 29.99
+          </p>
+          <div
+            class="flex justify-end space-x-2 mt-4"
+          >
+            <button
+              class="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              Editar
+            </button>
+            <button
+              class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            >
+              Excluir
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="bg-white rounded-lg shadow-md overflow-hidden"
+        data-testid="product-card"
+      >
+        <div
+          class="relative h-48"
+        >
+          <img
+            alt="Test Product 2"
+            class="object-cover"
+            src="/images/test-product-2.jpg"
+          />
+        </div>
+        <div
+          class="p-4"
+        >
+          <h3
+            class="text-lg font-semibold"
+          >
+            Test Product 2
+          </h3>
+          <p
+            class="text-gray-600"
+          >
+            Roupas
+          </p>
+          <p
+            class="text-sm text-gray-500 mt-2"
+          >
+            Test description 2
+          </p>
+          <p
+            class="text-xl font-bold text-blue-600 mt-2"
+          >
+            R$ 39.99
+          </p>
+          <div
+            class="flex justify-end space-x-2 mt-4"
+          >
+            <button
+              class="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              Editar
+            </button>
+            <button
+              class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            >
+              Excluir
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="mt-6 space-y-2"
+    >
+      <div
+        class="flex items-center justify-center text-sm text-gray-700"
+      >
+        Mostrando 
+        1
+         - 
+        2
+         de 
+        2
+         itens
+      </div>
+      <div
+        class="flex items-center justify-center space-x-2"
+      >
+        <button
+          class="px-3 py-1 rounded-md text-gray-400 cursor-not-allowed"
+          disabled=""
+        >
+          Anterior
+        </button>
+        <button
+          class="px-3 py-1 rounded-md bg-blue-600 text-white"
+        >
+          1
+        </button>
+        <button
+          class="px-3 py-1 rounded-md text-gray-400 cursor-not-allowed"
+          disabled=""
+        >
+          Próxima
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
