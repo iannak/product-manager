@@ -1,26 +1,24 @@
-# Build stage
-FROM node:20-alpine AS builder
+# Etapa de build com Node.js
+FROM node:18 AS build
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+# Copiar dependências
+COPY package.json package-lock.json ./
+RUN npm install --legacy-peer-deps
 
+# Copiar o restante do código
 COPY . .
+
+# Build da aplicação
 RUN npm run build
 
-# Production stage
-FROM node:20-alpine AS runner
+# Etapa de deploy com Nginx (para servir a aplicação estática)
+FROM nginx:alpine
 
-WORKDIR /app
+# Copiar os arquivos de build para o Nginx
+COPY --from=build /app/build /usr/share/nginx/html
 
-ENV NODE_ENV=production
+EXPOSE 80
 
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/node_modules ./node_modules
-
-EXPOSE 3000
-
-CMD ["npm", "run", "start"] 
+CMD ["nginx", "-g", "daemon off;"]

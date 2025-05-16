@@ -2,7 +2,7 @@ import { Product } from '@/types/Product';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { deleteProduct } from '@/store/productSlice';
-import { config } from '@/config/env.config';
+import { api } from '@/config/api';
 
 interface ProductCardProps {
   product: Product;
@@ -21,7 +21,7 @@ export const ProductCard = ({ product, onEdit }: ProductCardProps) => {
     if (!isConfirmed) return;
 
     try {
-      const response = await fetch(`${config.apiUrl}/products/${product.id}`, {
+      const response = await fetch(`${api.baseURL}/products/${product.id}`, {
         method: 'DELETE',
       });
 

@@ -1,0 +1,15 @@
+app = "product-manager-frontend"
+primary_region = "gig"
+
+[build]
+  dockerfile = "Dockerfile"   # Este Dockerfile está na pasta frontend
+  context = "."
+
+[http_service]
+  internal_port = 80   # Nginx vai expor a porta 80
+  force_https = true
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

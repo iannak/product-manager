@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addProduct, updateProduct } from '@/store/productSlice';
 import { AppDispatch } from '@/store/store';
 import { Product, PRODUCT_CATEGORIES, ProductCategory } from '@/types/Product';
-import { config } from '@/config/env.config';
+import { api } from '@/config/api';
 
 interface ProductFormProps {
   productToEdit?: Product | null;
@@ -46,9 +46,9 @@ export const ProductForm = ({ productToEdit, onCancel }: ProductFormProps) => {
     };
   
     if (productToEdit) {
-      console.log("API URL:", config.apiUrl);
+      console.log("API URL:", api.baseURL);
   
-      const response = await fetch(`${config.apiUrl}/products/${productToEdit.id}`, {
+      const response = await fetch(`${api.baseURL}/products/${productToEdit.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export const ProductForm = ({ productToEdit, onCancel }: ProductFormProps) => {
     } else {
       console.log("Enviando dados para a API:", productData); // 👈 TESTE
   
-      const response = await fetch(`${config.apiUrl}/products`, {
+      const response = await fetch(`${api.baseURL}/products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

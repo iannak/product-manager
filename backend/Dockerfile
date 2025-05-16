@@ -1,21 +1,21 @@
-# Dockerfile
-FROM node:20-alpine
+# Usando a imagem oficial do Node.js
+FROM node:18
 
 WORKDIR /app
 
-COPY package*.json ./
+# Copiar os arquivos de configuração e dependências
+COPY package.json package-lock.json ./
 
+# Instalar as dependências
 RUN npm install --legacy-peer-deps
 
-COPY . .
+# Copiar o restante do código para dentro do container (incluindo a pasta src)
+COPY . /app
 
+EXPOSE 3001
+
+# Rodar o build
 RUN npm run build
 
-ENV PORT=3001
-EXPOSE ${PORT}
-
-# Create a shell script to handle startup
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
-ENTRYPOINT ["docker-entrypoint.sh"]
+# Iniciar o servidor
+CMD ["npm", "start"]
