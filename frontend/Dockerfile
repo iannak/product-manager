@@ -1,24 +1,22 @@
-# Etapa de build com Node.js
+# Etapa de build
 FROM node:18 AS build
 
 WORKDIR /app
 
-# Copiar dependências
 COPY package.json package-lock.json ./
 RUN npm install --legacy-peer-deps
 
-# Copiar o restante do código
 COPY . .
-
-# Build da aplicação
 RUN npm run build
 
-# Etapa de deploy com Nginx (para servir a aplicação estática)
-FROM nginx:alpine
+# Etapa final (SSR)
+FROM node:18
 
-# Copiar os arquivos de build para o Nginx
-COPY --from=build /app/build /usr/share/nginx/html
+WORKDIR /app
 
-EXPOSE 80
+COPY --from=build /app ./
 
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]
+

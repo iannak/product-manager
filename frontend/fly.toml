@@ -2,14 +2,56 @@ app = "product-manager-frontend"
 primary_region = "gig"
 
 [build]
-  dockerfile = "Dockerfile"   # Este Dockerfile está na pasta frontend
+  dockerfile = "Dockerfile"
   context = "."
 
+[env]
+  PORT = "3000"
+  NEXT_PUBLIC_API_URL = "https://product-manager-little-wave-7617.fly.dev"
+
 [http_service]
-  internal_port = 80   # Nginx vai expor a porta 80
+  internal_port = 3000
   force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 3000
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.tcp_checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "30s"
+    restart_limit = 3
+
+  [[services.http_checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "30s"
+    method = "get"
+    path = "/"
+    protocol = "http"
+    tls_skip_verify = true

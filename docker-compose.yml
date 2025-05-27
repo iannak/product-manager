@@ -13,7 +13,6 @@ services:
       - backend
     networks:
       - app_network
-    restart: unless-stopped
 
   backend:
     build:
@@ -24,18 +23,16 @@ services:
     environment:
       - PORT=3001
       - CORS_ORIGIN=http://localhost:3000
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=postgres
-      - DB_NAME=postgres
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_NAME=product_manager
       - SEED_DB=true
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     networks:
       - app_network
-    restart: unless-stopped
 
   postgres:
     image: postgres:16-alpine
@@ -44,18 +41,17 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=product_manager
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -h localhost"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
       start_period: 10s
     networks:
       - app_network
-    restart: unless-stopped
 
 volumes:
   postgres_data:
@@ -63,3 +59,4 @@ volumes:
 networks:
   app_network:
     driver: bridge
+
