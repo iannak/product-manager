@@ -11,6 +11,7 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { OrdersService } from './orders.service';
 import { Order } from './entities/order.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { OrderStatus } from './entities/order.entity';
 
 @ApiTags('orders')
 @Controller('orders')
@@ -44,7 +45,7 @@ export class OrdersController {
   @ApiResponse({ status: 200, description: 'Order found', type: Order })
   @ApiResponse({ status: 404, description: 'Order not found' })
   findOne(@Param('id') id: string): Promise<Order> {
-    return this.ordersService.findOne(+id);
+    return this.ordersService.findOne(id);
   }
 
   @Put(':id/status')
@@ -56,15 +57,15 @@ export class OrdersController {
   })
   updateStatus(
     @Param('id') id: string,
-    @Body('status') status: string,
+    @Body('status') status: OrderStatus,
   ): Promise<Order> {
-    return this.ordersService.updateStatus(+id, status);
+    return this.ordersService.updateStatus(id, status);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Remove an order' })
   @ApiResponse({ status: 200, description: 'Order removed successfully' })
   remove(@Param('id') id: string): Promise<void> {
-    return this.ordersService.remove(+id);
+    return this.ordersService.remove(id);
   }
 }

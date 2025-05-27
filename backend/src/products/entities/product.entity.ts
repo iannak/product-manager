@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
 import { Order } from '../../orders/entities/order.entity';
 
 @Entity('products')
@@ -25,5 +25,16 @@ export class Product {
   imagem_url: string;
 
   @ManyToMany(() => Order, (order) => order.produtos)
+  @JoinTable({
+    name: 'order_products',
+    joinColumn: {
+      name: 'product_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'order_id',
+      referencedColumnName: 'id',
+    },
+  })
   orders: Order[];
 }

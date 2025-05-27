@@ -13,10 +13,10 @@ export const config = {
   port: parseInt(process.env.PORT || '3001', 10),
   corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:3001',
   database: {
-    host: process.env.DB_HOST || 'postgres',
-    port: parseInt(process.env.DB_PORT || '5432', 10),
-    username: process.env.DB_USERNAME || 'postgres',
-    password: process.env.DB_PASSWORD || 'postgres',
-    database: process.env.DB_NAME || 'postgres',
+    host: process.env.DATABASE_HOST || 'localhost',
+    port: parseInt(process.env.DATABASE_PORT || '5432', 10),
+    username: process.env.DATABASE_USER || 'postgres',
+    password: process.env.DATABASE_PASSWORD || 'postgres',
+    database: process.env.DATABASE_NAME || 'product_manager',
   } as DatabaseConfig,
 };

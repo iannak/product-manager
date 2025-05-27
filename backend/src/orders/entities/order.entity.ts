@@ -2,7 +2,6 @@ import {
   Entity,
   Column,
   ManyToMany,
-  JoinTable,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Product } from '../../products/entities/product.entity';
@@ -13,18 +12,21 @@ export enum OrderStatus {
   CANCELLED = 'CANCELLED',
 }
 
-@Entity()
+@Entity('orders')
 export class Order {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column()
-  status: string;
+  @Column({
+    type: 'enum',
+    enum: OrderStatus,
+    default: OrderStatus.PENDING
+  })
+  status: OrderStatus;
 
-  @Column()
+  @Column('decimal')
   total_pedido: number;
 
-  @ManyToMany(() => Product)
-  @JoinTable()
+  @ManyToMany(() => Product, (product) => product.orders)
   produtos: Product[];
 }

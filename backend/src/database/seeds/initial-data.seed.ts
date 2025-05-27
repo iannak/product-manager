@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Product } from '../../products/entities/product.entity';
-import { Order } from '../../orders/entities/order.entity';
+import { Order, OrderStatus } from '../../orders/entities/order.entity';
 import { Seeder } from 'typeorm-extension';
 
 export class InitialDataSeeder implements Seeder {
@@ -58,17 +58,17 @@ export class InitialDataSeeder implements Seeder {
 
     await orderRepository.save([
       {
-        status: 'PENDING',
+        status: OrderStatus.PENDING,
         produtos: [products[0], products[1]],
         total_pedido: products[0].preco + products[1].preco,
       },
       {
-        status: 'APPROVED',
+        status: OrderStatus.APPROVED,
         produtos: [products[2], products[4]],
         total_pedido: products[2].preco + products[4].preco,
       },
       {
-        status: 'PENDING',
+        status: OrderStatus.PENDING,
         produtos: [products[3]],
         total_pedido: products[3].preco,
       },

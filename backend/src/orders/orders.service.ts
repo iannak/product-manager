@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Order } from './entities/order.entity';
+import { Order, OrderStatus } from './entities/order.entity';
 import { Product } from '../products/entities/product.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
 
@@ -16,7 +16,7 @@ export class OrdersService {
 
   async create(createOrderDto: CreateOrderDto): Promise<Order> {
     const order = new Order();
-    order.status = createOrderDto.status;
+    order.status = createOrderDto.status as OrderStatus;
 
     const products = await this.productsRepository.findByIds(
       createOrderDto.produtos,
@@ -40,7 +40,7 @@ export class OrdersService {
     });
   }
 
-  async findOne(id: number): Promise<Order> {
+  async findOne(id: string): Promise<Order> {
     const order = await this.ordersRepository.findOne({
       where: { id },
       relations: ['produtos'],
@@ -51,13 +51,13 @@ export class OrdersService {
     return order;
   }
 
-  async updateStatus(id: number, status: string): Promise<Order> {
+  async updateStatus(id: string, status: OrderStatus): Promise<Order> {
     const order = await this.findOne(id);
     order.status = status;
     return await this.ordersRepository.save(order);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     const result = await this.ordersRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException(`Order with ID ${id} not found`);
