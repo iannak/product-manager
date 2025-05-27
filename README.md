@@ -1,70 +1,124 @@
-Projeto de Gerenciamento de Pedidos
-Este projeto é uma API construída com NestJS para gerenciamento de produtos e pedidos, utilizando banco de dados PostgreSQL e containerizada com Docker Compose.
+# Product Manager
 
-🐳 Rodando com Docker Compose
-Pré-requisitos
-Docker
+A full-stack application for managing products and orders, built with NestJS and Next.js.
 
-Docker Compose
+## Features
 
-🚀 Instruções
-Clone o repositório
+- Product management (CRUD operations)
+- Order management
+- Real-time status updates
+- Responsive design
+- Filtering and sorting capabilities
+- Pagination
 
+## Tech Stack
 
-git clone https://github.com/seu-usuario/nome-do-projeto.git
-cd nome-do-projeto
-Crie o arquivo .env
+### Backend
+- NestJS
+- TypeScript
+- PostgreSQL
+- TypeORM
+- Docker
+- Fly.io (Deployment)
 
-Crie um arquivo .env na raiz do projeto com o seguinte conteúdo:
+### Frontend
+- Next.js
+- TypeScript
+- Redux Toolkit
+- Tailwind CSS
+- Fly.io (Deployment)
 
-env
+## Getting Started
 
-POSTGRES_DB=orders_db
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-DB_HOSt=postgres
-DB_PORT=5432
-DATABASE_NAME=postgres
-DATABASE_USERNAME=postgres
-DATABASE_PASSWORD=postgres
-APP_PORT=3001
-Suba os containers
+### Prerequisites
+- Node.js (v18 or higher)
+- Docker and Docker Compose
+- Fly.io CLI
+- PostgreSQL
 
+### Development Setup
 
-docker-compose up --build
-Isso iniciará:
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/product-manager.git
+cd product-manager
+```
 
-O backend NestJS na porta 3001
+2. Backend Setup:
+```bash
+cd backend
+npm install
+cp .env.example .env  # Configure your environment variables
+npm run start:dev
+```
 
-O PostgreSQL na porta 5432
+3. Frontend Setup:
+```bash
+cd frontend
+npm install
+cp .env.example .env  # Configure your environment variables
+npm run dev
+```
 
-📂 Estrutura do Projeto
-css
+4. Database Setup:
+```bash
+docker-compose up -d
+```
 
-.
-├── docker-compose.yml
-├── Dockerfile
-├── src/
-│   ├── orders/
-│   ├── products/
-│   └── main.ts
-├── .env
-├── README.md
-└── ...
-🔍 Endpoints
-Após subir o projeto, você pode acessar a documentação Swagger:
+### Environment Variables
 
+#### Backend (.env)
+```
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/product_manager
+PORT=3001
+```
 
-http://localhost:3001/api
-🛑 Parar os containers
+#### Frontend (.env)
+```
+NEXT_PUBLIC_API_URL=http://localhost:3001
+```
 
-docker-compose down
-Para remover volumes:
+## Deployment
 
+### Backend Deployment
+1. Install Fly.io CLI
+2. Login to Fly.io:
+```bash
+fly auth login
+```
+3. Deploy:
+```bash
+cd backend
+fly deploy
+```
 
-docker-compose down -v
-🧪 Testes
-Caso existam testes configurados, você pode rodá-los com:
+### Frontend Deployment
+1. Deploy:
+```bash
+cd frontend
+fly deploy
+```
 
+## CI/CD
 
-docker-compose exec backend npm run test
+The project uses GitHub Actions for continuous integration and deployment:
+
+- Automatic deployment to Fly.io on push to main branch
+- Separate workflows for frontend and backend
+- Environment variables managed through GitHub Secrets
+
+## API Documentation
+
+The API documentation is available at `/api` when running the backend server.
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
