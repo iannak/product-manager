@@ -11,7 +11,7 @@ interface DatabaseConfig {
 
 export const config = {
   port: parseInt(process.env.PORT || '3001', 10),
-  corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:3001',
+  corsOrigin: process.env.CORS_ORIGIN || 'https://product-manager-frontend.fly.dev',
   database: {
     host: process.env.DATABASE_HOST || 'localhost',
     port: parseInt(process.env.DATABASE_PORT || '5432', 10),
