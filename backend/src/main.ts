@@ -11,7 +11,7 @@ async function bootstrap() {
 
   // Habilita CORS
   app.enableCors({
-    origin: true, // Permite todas as origens em desenvolvimento
+    origin: ['https://product-manager-frontend.fly.dev', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
